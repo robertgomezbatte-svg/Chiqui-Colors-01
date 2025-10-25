@@ -344,53 +344,47 @@ body {
     </div>
   </footer>
 
-  <script>
-    // Año dinámico
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Menú móvil accesible
-    const menuBtn = document.getElementById('menuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-    if(menuBtn){
-      menuBtn.addEventListener('click', ()=>{
-        const expanded = menuBtn.getAttribute('aria-expanded') === 'true';
-        menuBtn.setAttribute('aria-expanded', String(!expanded));
-        mobileMenu.hidden = expanded;
-      });
-    }
-
-    // Formulario (simulado)
-    function handleSubmit(e){
-      e.preventDefault();
-      const form = e.target;
-      const data = Object.fromEntries(new FormData(form));
-      const status = document.getElementById('formStatus');
-      status.textContent = '¡Gracias, ' + data.nombre + '! Te contactaremos pronto en ' + data.email + '.';
-      form.reset();
-    }
-
-    // Reserva (simulada)
-    function handleBooking(e){
-      e.preventDefault();
-      const data = Object.fromEntries(new FormData(e.target));
-      const out = document.getElementById('bookingStatus');
-      out.textContent = 'Solicitud enviada para ' + data.fecha + ' a las ' + data.hora + ' (' + data.ninos + ' niños). Te llamaremos al ' + data.telefono + ' para confirmar.';
-      e.target.reset();
-    }
 <script>
+  // Año dinámico
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Menú móvil accesible
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  if (menuBtn) {
+    menuBtn.addEventListener('click', () => {
+      const expanded = menuBtn.getAttribute('aria-expanded') === 'true';
+      menuBtn.setAttribute('aria-expanded', String(!expanded));
+      mobileMenu.hidden = expanded;
+    });
+  }
+
+  // Formulario (simulado)
+  function handleSubmit(e){
+    e.preventDefault();
+    const form = e.target;
+    const data = Object.fromEntries(new FormData(form));
+    const status = document.getElementById('formStatus');
+    status.textContent = '¡Gracias, ' + data.nombre + '! Te contactaremos pronto en ' + data.email + '.';
+    form.reset();
+  }
+
+  // Reserva (simulada)
+  function handleBooking(e){
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(e.target));
+    const out = document.getElementById('bookingStatus');
+    out.textContent = 'Solicitud enviada para ' + data.fecha + ' a las ' + data.hora + ' (' + data.ninos + ' niños). Te llamaremos al ' + data.telefono + ' para confirmar.';
+    e.target.reset();
+  }
+
   // === Ocultar/mostrar header al hacer scroll ===
   (function(){
     const header = document.querySelector('header');
-    if(!header) return;
-
-    // Evita que el header fijo tape el contenido
-    function fixBodyOffset(){
-      document.body.style.paddingTop = header.offsetHeight + 'px';
-    }
-    fixBodyOffset();
-    window.addEventListener('resize', fixBodyOffset);
+    if (!header) return;
 
     let lastScroll = window.pageYOffset || document.documentElement.scrollTop;
+
     window.addEventListener('scroll', () => {
       const current = window.pageYOffset || document.documentElement.scrollTop;
 
@@ -403,7 +397,7 @@ body {
         header.classList.remove('hide');
       }
 
-      lastScroll = current <= 0 ? 0 : current; // evita errores en iOS
+      lastScroll = current <= 0 ? 0 : current; // evita negativos en iOS
     }, { passive: true });
   })();
 </script>
