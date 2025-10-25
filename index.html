@@ -188,7 +188,6 @@ body {
   /* Ocultamos el botón “Menú” porque ya no hace falta desplegar nada */
   #menuBtn{display:none}
 }
-    }
   </style>
 </head>
 <body>
@@ -243,9 +242,13 @@ body {
           <div class="card"><div class="stat">🧦</div><div class="muted">Juego seguro (calcetines)</div></div>
         </div>
       </div>
-      <div class="mock" aria-hidden="true">
-        <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?q=80&w=1400&auto=format&fit=crop" alt="Cumpleaños infantil con globos y tarta" />
-      </div>
+      <div class="mock rotator" id="heroRotator" aria-label="Galería cabecera">
+  <button class="rot-btn prev" aria-label="Anterior">‹</button>
+  <img id="heroImage"
+       src="https://raw.githubusercontent.com/robertgomezbatte-svg/Chiqui-Colors-01/main/img/hero1.jpg"
+       alt="Foto de cumpleaños en Chiqui Colors" />
+  <button class="rot-btn next" aria-label="Siguiente">›</button>
+</div>
     </section>
 
     <section id="servicios" class="container">
