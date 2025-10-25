@@ -92,7 +92,23 @@ body {
     .showcase{display:grid;grid-template-columns:1.4fr 1fr;gap:18px}
     .mock{border-radius:var(--radius);overflow:hidden;border:1px solid var(--soft);background:var(--card)}
     .mock img{display:block;width:100%;height:auto}
+/* Rotadores */
+.rotator{ position:relative; }
+.rotator img{ display:block; width:100%; height:auto; transition: opacity .5s ease-in-out; }
 
+.rot-btn{
+  position:absolute; top:50%; transform:translateY(-50%);
+  border:none; background:rgba(255,255,255,.9);
+  padding:6px 12px; border-radius:999px; box-shadow:var(--shadow);
+  cursor:pointer; font-size:22px; line-height:1; color:#333;
+}
+.rotator .prev{ left:10px; }
+.rotator .next{ right:10px; }
+.rot-btn:hover{ background:#fff; }
+
+@media (max-width: 960px){
+  .rot-btn{ padding:6px 10px; font-size:20px; }
+}
     /* Pricing */
     .pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .plan {
@@ -258,9 +274,13 @@ body {
       <h2 class="section-title">Galería</h2>
       <p class="section-sub">Un vistazo al ambiente: color, risas y buen rollo.</p>
       <div class="showcase">
-        <div class="mock">
-          <img src="https://images.unsplash.com/photo-1560807707-8cc77767d783?q=80&w=1200&auto=format&fit=crop" alt="Parque de bolas con piscina de pelotas" />
-        </div>
+        <div class="mock rotator" id="galRotator" aria-label="Galería del local">
+  <button class="rot-btn prev" aria-label="Anterior">‹</button>
+  <img id="galleryImage"
+       src="https://raw.githubusercontent.com/robertgomezbatte-svg/Chiqui-Colors-01/main/img/local1.jpg"
+       alt="Vista del local Chiqui Colors" />
+  <button class="rot-btn next" aria-label="Siguiente">›</button>
+</div>
         <div class="card">
           <h3>Cumples memorables sin estrés</h3>
           <p>Nos encargamos del espacio y la organización básica. Tú solo trae las ganas de celebración.</p>
@@ -450,6 +470,74 @@ body {
       lastScroll = current <= 0 ? 0 : current; // evita negativos en iOS
     }, { passive: true });
   })();
+  // === Rotadores con auto-play y botones ===
+(function(){
+  // --- HERO ---
+  const heroImg = document.getElementById('heroImage');
+  const heroRot = document.getElementById('heroRotator');
+  if(heroImg && heroRot){
+    const heroPrev = heroRot.querySelector('.prev');
+    const heroNext = heroRot.querySelector('.next');
+    const heroImages = [
+      "https://raw.githubusercontent.com/robertgomezbatte-svg/Chiqui-Colors-01/main/img/hero1.jpg",
+      "https://raw.githubusercontent.com/robertgomezbatte-svg/Chiqui-Colors-01/main/img/hero2.jpg",
+      "https://raw.githubusercontent.com/robertgomezbatte-svg/Chiqui-Colors-01/main/img/hero3.jpg"
+    ];
+    let hi = 0, heroTimer = null;
+
+    function setHero(i){
+      hi = (i + heroImages.length) % heroImages.length;
+      heroImg.style.opacity = 0;
+      setTimeout(()=>{
+        heroImg.src = heroImages[hi];
+        heroImg.style.opacity = 1;
+      }, 250);
+    }
+    function startHero(){ heroTimer = setInterval(()=>setHero(hi+1), 4000); }
+    function stopHero(){ if(heroTimer) clearInterval(heroTimer); }
+
+    heroPrev.addEventListener('click', ()=>{ stopHero(); setHero(hi-1); startHero(); });
+    heroNext.addEventListener('click', ()=>{ stopHero(); setHero(hi+1); startHero(); });
+
+    // pausa autoplay al pasar el dedo/ratón por encima
+    heroRot.addEventListener('mouseenter', stopHero);
+    heroRot.addEventListener('mouseleave', startHero);
+    startHero();
+  }
+
+  // --- GALERÍA ---
+  const galImg = document.getElementById('galleryImage');
+  const galRot = document.getElementById('galRotator');
+  if(galImg && galRot){
+    const galPrev = galRot.querySelector('.prev');
+    const galNext = galRot.querySelector('.next');
+    const galleryImages = [
+      "https://raw.githubusercontent.com/robertgomezbatte-svg/Chiqui-Colors-01/main/img/local1.jpg",
+      "https://raw.githubusercontent.com/robertgomezbatte-svg/Chiqui-Colors-01/main/img/local2.jpg",
+      "https://raw.githubusercontent.com/robertgomezbatte-svg/Chiqui-Colors-01/main/img/local3.jpg",
+      "https://raw.githubusercontent.com/robertgomezbatte-svg/Chiqui-Colors-01/main/img/local4.jpg"
+    ];
+    let gi = 0, galTimer = null;
+
+    function setGal(i){
+      gi = (i + galleryImages.length) % galleryImages.length;
+      galImg.style.opacity = 0;
+      setTimeout(()=>{
+        galImg.src = galleryImages[gi];
+        galImg.style.opacity = 1;
+      }, 250);
+    }
+    function startGal(){ galTimer = setInterval(()=>setGal(gi+1), 5000); }
+    function stopGal(){ if(galTimer) clearInterval(galTimer); }
+
+    galPrev.addEventListener('click', ()=>{ stopGal(); setGal(gi-1); startGal(); });
+    galNext.addEventListener('click', ()=>{ stopGal(); setGal(gi+1); startGal(); });
+
+    galRot.addEventListener('mouseenter', stopGal);
+    galRot.addEventListener('mouseleave', startGal);
+    startGal();
+  }
+})();
 </script>
 </body>
 </html>
