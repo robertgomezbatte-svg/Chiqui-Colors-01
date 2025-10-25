@@ -95,10 +95,36 @@ body {
 
     /* Pricing */
     .pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .plan{background:var(--card);border:1px solid var(--soft);border-radius:var(--radius);padding:24px;display:flex;flex-direction:column}
-    .price{font-size:2rem;font-weight:800;margin:.2rem 0 1rem;color:#7a2456}
-    .plan ul{list-style:none;padding:0;margin:0;display:grid;gap:.55rem;color:var(--muted)}
-    .plan .cta{margin-top:auto}
+.plan {
+  background: var(--card);
+  border: 1px solid var(--soft);
+  border-radius: var(--radius);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow);
+}
+
+.price {
+  font-size: 2rem;
+  font-weight: 800;
+  margin: .2rem 0 1rem;
+  color: #7a2456;
+}
+
+.plan ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0; /* 🔥 añade espacio debajo de la lista */
+  display: grid;
+  gap: .55rem;
+  color: var(--muted);
+}
+
+.plan .cta {
+  margin-top: auto;
+  margin-top: 12px; /* 🔥 espacio extra antes del botón */
+}
 
     /* FAQ */
     details{background:var(--card);border:1px solid var(--soft);border-radius:14px;padding:16px}
