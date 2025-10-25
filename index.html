@@ -112,16 +112,40 @@ body {
 
     footer{padding:36px 0;border-top:1px solid rgba(0,0,0,.08);color:var(--muted)}
 
-    /* Responsive */
-    .only-mobile{display:none}
-    @media (max-width: 960px){
-      .hero{grid-template-columns:1fr;gap:16px;padding-top:20px}
-      .hero-cards{grid-template-columns:1fr 1fr}
-      .features{grid-template-columns:1fr 1fr}
-      .showcase{grid-template-columns:1fr}
-      .pricing{grid-template-columns:1fr}
-      .only-desktop{display:none}
-      .only-mobile{display:block}
+/* Responsive */
+.only-mobile{display:none}
+
+@media (max-width: 960px){
+  /* Estructura principal */
+  .hero{grid-template-columns:1fr;gap:16px;padding-top:20px}
+  .hero-cards{grid-template-columns:1fr 1fr}
+  .features{grid-template-columns:1fr 1fr}
+  .showcase{grid-template-columns:1fr}
+  .pricing{grid-template-columns:1fr}
+
+  /* Ocultamos el menú de escritorio */
+  .only-desktop{display:none}
+
+  /* Mostramos el contenedor móvil SIEMPRE y en horizontal */
+  .only-mobile{display:block}
+  #mobileMenu{display:block !important; padding:0}
+  #mobileMenu nav ul{
+    display:flex !important;
+    flex-wrap:nowrap;
+    gap:12px;
+    overflow-x:auto;           /* scroll horizontal si no cabe */
+    -webkit-overflow-scrolling:touch;
+    white-space:nowrap;        /* que no salten de línea */
+    padding:8px 0;
+    margin:0;
+  }
+  #mobileMenu nav ul li{
+    flex:0 0 auto;             /* que cada item mantenga su ancho */
+  }
+
+  /* Ocultamos el botón “Menú” porque ya no hace falta desplegar nada */
+  #menuBtn{display:none}
+}
     }
   </style>
 </head>
