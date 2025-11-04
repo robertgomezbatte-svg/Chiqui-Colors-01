@@ -486,16 +486,18 @@ body {
   // === Rotadores con auto-play y botones ===
 (function(){
   // --- HERO ---
-  const heroImg = document.getElementById('heroImage');
-  const heroRot = document.getElementById('heroRotator');
-  if(heroImg && heroRot){
-    const heroPrev = heroRot.querySelector('.prev');
-    const heroNext = heroRot.querySelector('.next');
-    const heroImages = [
-      "https://raw.githubusercontent.com/robertgomezbatte-svg/Chiqui-Colors-01/main/img/hero1.jpg",
-      "https://raw.githubusercontent.com/robertgomezbatte-svg/Chiqui-Colors-01/main/img/hero2.jpg",
-      "https://raw.githubusercontent.com/robertgomezbatte-svg/Chiqui-Colors-01/main/img/hero3.jpg"
-    ];
+const heroImg = document.getElementById('heroImage');
+const heroRot = document.getElementById('heroRotator');
+if (heroImg && heroRot) {
+  const heroPrev = heroRot.querySelector('.prev');
+  const heroNext = heroRot.querySelector('.next');
+  const heroImages = [
+    "https://raw.githubusercontent.com/robertgomezbatte-svg/Chiqui-Colors-01/main/1.jpeg",
+    "https://raw.githubusercontent.com/robertgomezbatte-svg/Chiqui-Colors-01/main/2.jpeg",
+    "https://raw.githubusercontent.com/robertgomezbatte-svg/Chiqui-Colors-01/main/3.jpeg",
+    "https://raw.githubusercontent.com/robertgomezbatte-svg/Chiqui-Colors-01/main/4.jpeg",
+    "https://raw.githubusercontent.com/robertgomezbatte-svg/Chiqui-Colors-01/main/5.jpeg"
+  ];
     let hi = 0, heroTimer = null;
 
     function setHero(i){
@@ -519,17 +521,24 @@ body {
   }
 
   // --- GALERÍA ---
-  const galImg = document.getElementById('galleryImage');
-  const galRot = document.getElementById('galRotator');
-  if(galImg && galRot){
-    const galPrev = galRot.querySelector('.prev');
-    const galNext = galRot.querySelector('.next');
-    const galleryImages = [
-      "https://raw.githubusercontent.com/robertgomezbatte-svg/Chiqui-Colors-01/main/img/local1.jpg",
-      "https://raw.githubusercontent.com/robertgomezbatte-svg/Chiqui-Colors-01/main/img/local2.jpg",
-      "https://raw.githubusercontent.com/robertgomezbatte-svg/Chiqui-Colors-01/main/img/local3.jpg",
-      "https://raw.githubusercontent.com/robertgomezbatte-svg/Chiqui-Colors-01/main/img/local4.jpg"
-    ];
+ const galImg = document.getElementById('galleryImage');
+const galRot = document.getElementById('galRotator');
+if (galImg && galRot) {
+  const galPrev = galRot.querySelector('.prev');
+  const galNext = galRot.querySelector('.next');
+  const galleryImages = [
+    "https://raw.githubusercontent.com/robertgomezbatte-svg/Chiqui-Colors-01/main/5.jpeg",
+    "https://raw.githubusercontent.com/robertgomezbatte-svg/Chiqui-Colors-01/main/6.jpeg",
+    "https://raw.githubusercontent.com/robertgomezbatte-svg/Chiqui-Colors-01/main/7.jpeg",
+    "https://raw.githubusercontent.com/robertgomezbatte-svg/Chiqui-Colors-01/main/8.jpeg",
+    "https://raw.githubusercontent.com/robertgomezbatte-svg/Chiqui-Colors-01/main/9.jpeg",
+    "https://raw.githubusercontent.com/robertgomezbatte-svg/Chiqui-Colors-01/main/10.jpeg",
+    "https://raw.githubusercontent.com/robertgomezbatte-svg/Chiqui-Colors-01/main/11.jpeg",
+    "https://raw.githubusercontent.com/robertgomezbatte-svg/Chiqui-Colors-01/main/12.jpeg",
+    "https://raw.githubusercontent.com/robertgomezbatte-svg/Chiqui-Colors-01/main/13.jpeg",
+    "https://raw.githubusercontent.com/robertgomezbatte-svg/Chiqui-Colors-01/main/14.jpeg",
+    "https://raw.githubusercontent.com/robertgomezbatte-svg/Chiqui-Colors-01/main/15.jpeg"
+  ];
     let gi = 0, galTimer = null;
 
     function setGal(i){
