@@ -254,9 +254,9 @@ body {
       </div>
       <div class="mock rotator" id="heroRotator" aria-label="Galería cabecera">
   <button class="rot-btn prev" aria-label="Anterior">‹</button>
-  <img id="galleryImage"
-     src="https://raw.githubusercontent.com/robertgomezbatte-svg/Chiqui-Colors-01/main/img/5.jpeg"
-     alt="Vista del local Chiqui Colors" />
+  <img id="heroImage"
+       src="https://raw.githubusercontent.com/robertgomezbatte-svg/Chiqui-Colors-01/main/img/1.jpeg"
+       alt="Foto de cumpleaños en Chiqui Colors" />
   <button class="rot-btn next" aria-label="Siguiente">›</button>
 </div>
     </section>
@@ -508,7 +508,7 @@ if (heroImg && heroRot) {
         heroImg.style.opacity = 1;
       }, 250);
     }
-    function startHero(){ heroTimer = setInterval(()=>setHero(hi+1), 4000); }
+    function startHero(){ heroTimer = setInterval(()=>setHero(hi+1), 6000); }
     function stopHero(){ if(heroTimer) clearInterval(heroTimer); }
 
     heroPrev.addEventListener('click', ()=>{ stopHero(); setHero(hi-1); startHero(); });
