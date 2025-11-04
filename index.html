@@ -517,7 +517,10 @@ if (heroImg && heroRot) {
     // pausa autoplay al pasar el dedo/ratón por encima
     heroRot.addEventListener('mouseenter', stopHero);
     heroRot.addEventListener('mouseleave', startHero);
-    startHero();
+  
+    // 🔥 Fuerza a mostrar la primera imagen desde el inicio
+setHero(0);
+startHero();
   }
 
   // --- GALERÍA ---
@@ -557,7 +560,10 @@ if (galImg && galRot) {
 
     galRot.addEventListener('mouseenter', stopGal);
     galRot.addEventListener('mouseleave', startGal);
-    startGal();
+   
+  // 🔥 Fuerza a mostrar la primera imagen desde el inicio
+setGal(0);
+startGal();
   }
 })();
 </script>
