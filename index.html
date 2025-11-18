@@ -503,10 +503,13 @@ Ven a conocernos y vive la experiencia Chiqui Colors. 🎉✨</p>
           <button id="nextMonth" type="button">›</button>
         </div>
 
-        <div class="agenda-legend">
-          <span class="legend-box free"></span> Día libre
-          <span class="legend-box occupied"></span> Día ocupado
-        </div>
+       <div class="agenda-legend">
+  <span class="legend-box free"></span> Libre
+  <span class="legend-box occupied"></span> Ocupado
+  <span class="slot free" style="padding:1px 4px;font-size:.7rem;">M</span> Mañana
+  <span class="slot free" style="padding:1px 4px;font-size:.7rem;">T</span> Tarde
+</div>
+
 
         <div id="agendaGrid" class="agenda-grid"></div>
 
@@ -789,7 +792,7 @@ if (galImg && galRot) {
     // Formato: "AAAA-MM-DD"
     const occupiedMorning = [
       // "2025-11-22",
-      // "2025-11-29",
+     "2025-11-22"
     ];
 
     const occupiedAfternoon = [
