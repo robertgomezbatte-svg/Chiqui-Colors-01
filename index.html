@@ -222,24 +222,61 @@ body {
 }
 
 .agenda-day{
-  min-height:32px;
+  min-height:40px;
   display:flex;
   align-items:center;
   justify-content:center;
   border-radius:10px;
 }
 
-.agenda-day.free{
-  background:rgba(181,255,110,0.35); /* verde libre */
+/* Fondo general del día */
+.agenda-day.day-free{
+  background:rgba(181,255,110,0.25);      /* todo libre */
 }
 
-.agenda-day.occupied{
-  background:rgba(255,69,75,0.3); /* rojo ocupado */
-  color:#7a2456;
+.agenda-day.day-full{
+  background:rgba(255,69,75,0.25);        /* todo ocupado */
+}
+
+.agenda-day.day-mixed{
+  background:rgba(245,178,55,0.25);       /* solo una franja ocupada (naranja suave) */
 }
 
 .agenda-day.empty{
   background:transparent;
+}
+
+/* Contenido interno: número + franjitas */
+.agenda-day-inner{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:2px;
+}
+
+.agenda-day-number{
+  font-weight:600;
+  font-size:.85rem;
+}
+
+.agenda-slots{
+  display:flex;
+  gap:2px;
+}
+
+.slot{
+  font-size:.7rem;
+  padding:1px 4px;
+  border-radius:6px;
+}
+
+.slot.free{
+  background:rgba(181,255,110,0.8);
+}
+
+.slot.occupied{
+  background:rgba(255,69,75,0.8);
+  color:#7a2456;
 }
 
     
@@ -739,18 +776,8 @@ if (galImg && galRot) {
     galRot.addEventListener('mouseenter', stopGal);
     galRot.addEventListener('mouseleave', startGal);
 
-    // === Agenda: días libres / ocupados ===
+  // === Agenda: días libres / ocupados (mañana / tarde) ===
   (function(){
-    // 👉 AQUÍ MARCAS LOS DÍAS OCUPADOS
-    // Formato: "AAAA-MM-DD"
-    const occupiedDates = [
-      "2025-11-22",
-      "2025-11-29",
-      // añade aquí más días ocupados
-      // "2025-12-05",
-      // "2025-12-12",
-    ];
-
     const grid  = document.getElementById('agendaGrid');
     const label = document.getElementById('monthLabel');
     const prev  = document.getElementById('prevMonth');
@@ -758,19 +785,29 @@ if (galImg && galRot) {
 
     if (!grid || !label || !prev || !next) return;
 
+    // 👉 DÍAS OCUPADOS POR FRANJA
+    // Formato: "AAAA-MM-DD"
+    const occupiedMorning = [
+      // "2025-11-22",
+      // "2025-11-29",
+    ];
+
+    const occupiedAfternoon = [
+      // "2025-11-23",
+      // "2025-11-29",
+    ];
+
     let today        = new Date();
     let currentYear  = today.getFullYear();
     let currentMonth = today.getMonth(); // 0 = enero
 
     function renderCalendar(year, month){
-      // etiqueta del mes
       const opts = { month:"long", year:"numeric" };
       label.textContent = new Date(year, month, 1).toLocaleDateString("es-ES", opts);
 
-      // limpiar
       grid.innerHTML = "";
 
-      // Nombres de los días (Lunes primero)
+      // Cabecera: nombres de los días
       const dayNames = ["Lun","Mar","Mié","Jue","Vie","Sáb","Dom"];
       dayNames.forEach(name => {
         const el = document.createElement("div");
@@ -780,19 +817,19 @@ if (galImg && galRot) {
       });
 
       const firstDay = new Date(year, month, 1);
-      let startWeekDay = firstDay.getDay(); // 0=Domingo, 1=Lunes...
-      startWeekDay = (startWeekDay === 0) ? 6 : startWeekDay - 1; // Lunes como primer día
+      let startWeekDay = firstDay.getDay(); // 0=Dom, 1=Lun...
+      startWeekDay = (startWeekDay === 0) ? 6 : startWeekDay - 1; // Lunes primero
 
       const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-      // huecos vacíos antes del día 1
+      // Huecos antes del día 1
       for(let i=0;i<startWeekDay;i++){
         const empty = document.createElement("div");
         empty.className = "agenda-day empty";
         grid.appendChild(empty);
       }
 
-      // días del mes
+      // Días del mes
       for(let day=1; day<=daysInMonth; day++){
         const cell = document.createElement("div");
         cell.classList.add("agenda-day");
@@ -801,10 +838,47 @@ if (galImg && galRot) {
         const dayStr   = String(day).padStart(2,"0");
         const dateStr  = `${year}-${monthStr}-${dayStr}`;
 
-        const isOccupied = occupiedDates.includes(dateStr);
-        cell.classList.add(isOccupied ? "occupied" : "free");
-        cell.textContent = day;
-        cell.title = isOccupied ? "Ocupado" : "Libre";
+        const morningOcc   = occupiedMorning.includes(dateStr);
+        const afternoonOcc = occupiedAfternoon.includes(dateStr);
+
+        // Estado general del día (fondo de la casilla)
+        if (!morningOcc && !afternoonOcc){
+          cell.classList.add("day-free");   // todo libre
+        } else if (morningOcc && afternoonOcc){
+          cell.classList.add("day-full");   // todo ocupado
+        } else {
+          cell.classList.add("day-mixed");  // solo una franja ocupada
+        }
+
+        // Contenido interno: número + M/T
+        const inner = document.createElement("div");
+        inner.className = "agenda-day-inner";
+
+        const num = document.createElement("div");
+        num.className = "agenda-day-number";
+        num.textContent = day;
+
+        const slots = document.createElement("div");
+        slots.className = "agenda-slots";
+
+        const slotM = document.createElement("span");
+        slotM.className = "slot " + (morningOcc ? "occupied" : "free");
+        slotM.textContent = "M"; // mañana
+
+        const slotT = document.createElement("span");
+        slotT.className = "slot " + (afternoonOcc ? "occupied" : "free");
+        slotT.textContent = "T"; // tarde
+
+        slots.appendChild(slotM);
+        slots.appendChild(slotT);
+
+        inner.appendChild(num);
+        inner.appendChild(slots);
+        cell.appendChild(inner);
+
+        cell.title =
+          "Mañana: " + (morningOcc ? "ocupado" : "libre") +
+          " · Tarde: " + (afternoonOcc ? "ocupado" : "libre");
 
         grid.appendChild(cell);
       }
@@ -828,9 +902,9 @@ if (galImg && galRot) {
       renderCalendar(currentYear, currentMonth);
     });
 
-    // pinta el mes actual al cargar
     renderCalendar(currentYear, currentMonth);
   })();
+
 
   // 🔥 Fuerza a mostrar la primera imagen desde el inicio
 setGal(0);
