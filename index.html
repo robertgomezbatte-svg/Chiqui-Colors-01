@@ -151,7 +151,98 @@ body {
   margin-top: auto;
   margin-top: 12px; /* 🔥 espacio extra antes del botón */
 }
+/* === Agenda / Calendario === */
+#agenda-reservas{
+  margin-top: 10px;
+}
 
+.agenda-controles{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:8px;
+}
+
+.agenda-controles button{
+  border:1px solid var(--soft);
+  background:#fff;
+  border-radius:999px;
+  padding:4px 10px;
+  cursor:pointer;
+  font-weight:600;
+  font-size:1rem;
+}
+
+.agenda-controles button:hover{
+  background:var(--soft);
+}
+
+#monthLabel{
+  font-weight:700;
+  text-transform:capitalize;
+}
+
+.agenda-legend{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  margin-bottom:8px;
+  font-size:.8rem;
+  color:var(--muted);
+  flex-wrap:wrap;
+}
+
+.legend-box{
+  width:14px;
+  height:14px;
+  border-radius:4px;
+  display:inline-block;
+}
+
+.legend-box.free{
+  background:rgba(181,255,110,0.4); /* verde suave */
+}
+
+.legend-box.occupied{
+  background:rgba(255,69,75,0.5); /* rojo suave */
+}
+
+.agenda-grid{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:4px;
+  font-size:.85rem;
+}
+
+.agenda-day-name{
+  text-align:center;
+  font-weight:600;
+  color:var(--muted);
+  padding:4px 0;
+}
+
+.agenda-day{
+  min-height:32px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:10px;
+}
+
+.agenda-day.free{
+  background:rgba(181,255,110,0.35); /* verde libre */
+}
+
+.agenda-day.occupied{
+  background:rgba(255,69,75,0.3); /* rojo ocupado */
+  color:#7a2456;
+}
+
+.agenda-day.empty{
+  background:transparent;
+}
+
+    
     /* FAQ */
     details{background:var(--card);border:1px solid var(--soft);border-radius:14px;padding:16px}
     details + details{margin-top:10px}
@@ -361,6 +452,34 @@ Ven a conocernos y vive la experiencia Chiqui Colors. 🎉✨</p>
         </article>
       </div>
     </section>
+    <!-- === Agenda de cumpleaños / días libres === -->
+    <section id="reserva" class="container">
+      <h2 class="section-title">Reservar cumpleaños</h2>
+      <p class="section-sub">
+        Consulta los días libres y escríbenos por WhatsApp para reservar tu fecha.
+      </p>
+
+      <div id="agenda-reservas" class="card">
+        <div class="agenda-controles">
+          <button id="prevMonth" type="button">‹</button>
+          <span id="monthLabel"></span>
+          <button id="nextMonth" type="button">›</button>
+        </div>
+
+        <div class="agenda-legend">
+          <span class="legend-box free"></span> Día libre
+          <span class="legend-box occupied"></span> Día ocupado
+        </div>
+
+        <div id="agendaGrid" class="agenda-grid"></div>
+
+        <p style="margin-top:12px;font-size:.9rem;color:var(--muted);">
+          Para reservar, mándanos un WhatsApp con la fecha y el horario que quieres,
+          y te confirmamos disponibilidad.
+        </p>
+      </div>
+    </section>
+
     
     <section id="info" class="container">
       <h2 class="section-title">Horarios, ubicación y normas</h2>
@@ -619,7 +738,100 @@ if (galImg && galRot) {
 
     galRot.addEventListener('mouseenter', stopGal);
     galRot.addEventListener('mouseleave', startGal);
-   
+
+    // === Agenda: días libres / ocupados ===
+  (function(){
+    // 👉 AQUÍ MARCAS LOS DÍAS OCUPADOS
+    // Formato: "AAAA-MM-DD"
+    const occupiedDates = [
+      "2025-11-22",
+      "2025-11-29",
+      // añade aquí más días ocupados
+      // "2025-12-05",
+      // "2025-12-12",
+    ];
+
+    const grid  = document.getElementById('agendaGrid');
+    const label = document.getElementById('monthLabel');
+    const prev  = document.getElementById('prevMonth');
+    const next  = document.getElementById('nextMonth');
+
+    if (!grid || !label || !prev || !next) return;
+
+    let today        = new Date();
+    let currentYear  = today.getFullYear();
+    let currentMonth = today.getMonth(); // 0 = enero
+
+    function renderCalendar(year, month){
+      // etiqueta del mes
+      const opts = { month:"long", year:"numeric" };
+      label.textContent = new Date(year, month, 1).toLocaleDateString("es-ES", opts);
+
+      // limpiar
+      grid.innerHTML = "";
+
+      // Nombres de los días (Lunes primero)
+      const dayNames = ["Lun","Mar","Mié","Jue","Vie","Sáb","Dom"];
+      dayNames.forEach(name => {
+        const el = document.createElement("div");
+        el.className = "agenda-day-name";
+        el.textContent = name;
+        grid.appendChild(el);
+      });
+
+      const firstDay = new Date(year, month, 1);
+      let startWeekDay = firstDay.getDay(); // 0=Domingo, 1=Lunes...
+      startWeekDay = (startWeekDay === 0) ? 6 : startWeekDay - 1; // Lunes como primer día
+
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+      // huecos vacíos antes del día 1
+      for(let i=0;i<startWeekDay;i++){
+        const empty = document.createElement("div");
+        empty.className = "agenda-day empty";
+        grid.appendChild(empty);
+      }
+
+      // días del mes
+      for(let day=1; day<=daysInMonth; day++){
+        const cell = document.createElement("div");
+        cell.classList.add("agenda-day");
+
+        const monthStr = String(month + 1).padStart(2,"0");
+        const dayStr   = String(day).padStart(2,"0");
+        const dateStr  = `${year}-${monthStr}-${dayStr}`;
+
+        const isOccupied = occupiedDates.includes(dateStr);
+        cell.classList.add(isOccupied ? "occupied" : "free");
+        cell.textContent = day;
+        cell.title = isOccupied ? "Ocupado" : "Libre";
+
+        grid.appendChild(cell);
+      }
+    }
+
+    prev.addEventListener("click", () => {
+      currentMonth--;
+      if (currentMonth < 0){
+        currentMonth = 11;
+        currentYear--;
+      }
+      renderCalendar(currentYear, currentMonth);
+    });
+
+    next.addEventListener("click", () => {
+      currentMonth++;
+      if (currentMonth > 11){
+        currentMonth = 0;
+        currentYear++;
+      }
+      renderCalendar(currentYear, currentMonth);
+    });
+
+    // pinta el mes actual al cargar
+    renderCalendar(currentYear, currentMonth);
+  })();
+
   // 🔥 Fuerza a mostrar la primera imagen desde el inicio
 setGal(0);
 startGal();
