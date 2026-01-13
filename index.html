@@ -354,6 +354,7 @@ body {
       <nav class="only-desktop" aria-label="Principal">
         <ul>
           <li><a href="#servicios">Servicios</a></li>
+          <li><a href="cumpleanos.html">Cumpleaños</a></li>
           <li><a href="#proyectos">Proyectos</a></li>
           <li><a href="#precios">Precios</a></li>
           <li><a href="#faq">FAQ</a></li>
@@ -367,6 +368,7 @@ body {
       <nav>
         <ul style="display:grid;gap:10px;padding-bottom:12px">
           <li><a href="#servicios">Servicios</a></li>
+          <li><a href="cumpleanos.html">Cumpleaños</a></li>
           <li><a href="#proyectos">Proyectos</a></li>
           <li><a href="#precios">Precios</a></li>
           <li><a href="#faq">FAQ</a></li>
@@ -798,6 +800,9 @@ if (galImg && galRot) {
   "2025-11-22",
   "2025-12-26",
   "2025-12-27",
+  "2026-01-18",
+  "2026-02-14",
+  "2026-01-31",
   "2026-02-01"
 ];
 
@@ -811,6 +816,12 @@ const occupiedAfternoon = [
   "2025-12-31",
   "2026-01-09",
   "2026-01-11",
+  "2026-01-14", 
+  "2026-01-17",
+  "2026-01-15",
+  "2026-01-27",
+  "2026-04-18",
+  "2026-06-06",
   "2026-01-10"
 ];
 
@@ -945,6 +956,7 @@ if (form) {
       headers: { "Accept": "application/json" }
     });
 
+    
     if (response.ok) {
       status.textContent = "¡Mensaje enviado! Te responderemos muy pronto 😊";
       form.reset();
