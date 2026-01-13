@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cumpleaños — Chiqui Colors</title>
+  <meta name="description" content="Celebra cumpleaños infantiles en Chiqui Colors. Parque infantil, merienda, sala privada y diversión asegurada." />
+  <link rel="icon" type="image/png" href="https://robertgomezbatte-svg.github.io/Chiqui-Colors-01/favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- 🔹 IMPORTANTE: reutilizamos los mismos estilos -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+<header>
+  <div class="container nav">
+    <a class="brand" href="index.html">
+      <div class="logo">
+        <img class="logo-img" src="https://raw.githubusercontent.com/robertgomezbatte-svg/Chiqui-Colors-01/main/logo.png" alt="Logo Chiqui Colors">
+      </div>
+      <span>Chiqui&nbsp;Colors</span>
+    </a>
+
+    <nav>
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="#info">Cómo son</a></li>
+        <li><a href="#calendario">Calendario</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- HERO -->
+  <section style="padding-top:40px">
+    <span class="kicker">Cumpleaños infantiles</span>
+    <h1>Cumpleaños inolvidables en Chiqui Colors</h1>
+    <p class="lead">
+      Celebra el cumpleaños de tu peque en un espacio seguro, colorido y pensado
+      para que ellos se diviertan mientras los adultos disfrutan con tranquilidad.
+    </p>
+
+    <a class="btn" href="#calendario">Ver disponibilidad</a>
+    <a class="btn secondary" href="index.html">Volver al inicio</a>
+  </section>
+
+  <!-- INFO -->
+  <section id="info">
+    <h2 class="section-title">¿Cómo son nuestros cumpleaños?</h2>
+    <p class="section-sub">
+      Nos encargamos de todo para que solo tengas que disfrutar del momento.
+    </p>
+
+    <div class="features">
+      <article class="feature">
+        <div class="icon">🎉</div>
+        <h3>Sala reservada</h3>
+        <p>Espacio exclusivo para tu grupo durante la celebración.</p>
+      </article>
+
+      <article class="feature">
+        <div class="icon">🍰</div>
+        <h3>Merienda incluida</h3>
+        <p>Opciones de merienda adaptadas a los peques.</p>
+      </article>
+
+      <article class="feature">
+        <div class="icon">🧸</div>
+        <h3>Parque infantil</h3>
+        <p>Acceso completo a las zonas de juego durante el cumpleaños.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- CALENDARIO -->
+  <section id="calendario">
+    <h2 class="section-title">Disponibilidad de cumpleaños</h2>
+    <p class="section-sub">
+      Consulta los días libres y escríbenos por WhatsApp para reservar tu fecha.
+    </p>
+
+    <!-- 🔥 MISMO CALENDARIO QUE YA USAS -->
+    <div id="agenda-reservas" class="card">
+      <div class="agenda-controles">
+        <button id="prevMonth">‹</button>
+        <span id="monthLabel"></span>
+        <button id="nextMonth">›</button>
+      </div>
+
+      <div class="agenda-legend">
+        <span class="legend-box free"></span> Libre
+        <span class="legend-box occupied"></span> Reservado
+        <span class="slot free">M</span> Mañana
+        <span class="slot free">T</span> Tarde
+      </div>
+
+      <div id="agendaGrid" class="agenda-grid"></div>
+
+      <p style="margin-top:12px;font-size:.9rem;color:var(--muted);">
+        Para reservar, envíanos un WhatsApp con la fecha y el horario.
+      </p>
+
+      <a class="btn" href="https://wa.me/34675751094" target="_blank">
+        Reservar por WhatsApp
+      </a>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto">
+    <h2 class="section-title">¿Tienes dudas?</h2>
+    <p class="section-sub">
+      Escríbenos y te informamos sin compromiso.
+    </p>
+
+    <a class="btn" href="https://wa.me/34675751094" target="_blank">
+      Hablar por WhatsApp
+    </a>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <small>© Chiqui Colors</small>
+  </div>
+</footer>
+
+<!-- 🔹 Copia aquí EXACTAMENTE el mismo JS del calendario que ya tienes -->
+<script>
+/* Pega aquí el mismo script de agenda que usas en index.html */
+</script>
+
+</body>
+</html>
