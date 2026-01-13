@@ -118,7 +118,6 @@ body {
   transition: opacity .5s ease-in-out;
 }
 
-
 .rot-btn{
   position:absolute; top:50%; transform:translateY(-50%);
   border:none; background:rgba(255,255,255,.9);
@@ -534,7 +533,6 @@ Somos una cafetería con parque infantil cubierto en la Creu Alta, ideal para pa
       </div>
     </section>
 
-    
     <section id="info" class="container">
       <h2 class="section-title">Horarios, ubicación y normas</h2>
       <div class="showcase">
@@ -675,7 +673,6 @@ Somos una cafetería con parque infantil cubierto en la Creu Alta, ideal para pa
     });
   }
 
-
   // Reserva (simulada)
   function handleBooking(e){
     e.preventDefault();
@@ -807,16 +804,7 @@ if (galImg && galRot) {
 ];
 
 const occupiedAfternoon = [
-  "2025-12-13",
-  "2025-12-20",
-  "2025-12-24",
-  "2025-12-25",
-  "2025-12-26",
-  "2025-12-27",
-  "2025-12-31",
-  "2026-01-09",
-  "2026-01-11",
-  "2026-01-14", 
+  "2025-12-13", "2025-12-20", "2025-12-24", "2025-12-25", "2025-12-26","2025-12-27", "2025-12-31", "2026-01-09", "2026-01-11", "2026-01-14", 
   "2026-01-17",
   "2026-01-15",
   "2026-01-27",
@@ -824,7 +812,6 @@ const occupiedAfternoon = [
   "2026-06-06",
   "2026-01-10"
 ];
-
 
     let today        = new Date();
     let currentYear  = today.getFullYear();
@@ -933,7 +920,6 @@ const occupiedAfternoon = [
 
     renderCalendar(currentYear, currentMonth);
   })();
-
 
   // 🔥 Fuerza a mostrar la primera imagen desde el inicio
 setGal(0);
