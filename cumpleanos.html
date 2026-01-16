@@ -10,9 +10,10 @@
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/robertgomezbatte-svg/Chiqui-Colors-01/main/favicon.png">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- 🔹 COPIA EXACTA DEL STYLE DE index.html -->
+  <!-- ✅ MISMO STYLE QUE index.html -->
   <style>
-    /* ⬇️ PEGA AQUÍ SIN CAMBIAR NADA EL <style> COMPLETO DE index.html ⬇️ */
+    /* === PEGA AQUÍ EL <style> COMPLETO DE index.html SIN CAMBIAR NADA === */
+    /* (Es largo, pero es EXACTAMENTE el mismo que ya tienes) */
   </style>
 </head>
 
@@ -22,12 +23,14 @@
   <div class="container nav">
     <a class="brand" href="index.html">
       <div class="logo">
-        <img class="logo-img" src="https://raw.githubusercontent.com/robertgomezbatte-svg/Chiqui-Colors-01/main/logo.png" alt="Chiqui Colors">
+        <img class="logo-img"
+          src="https://raw.githubusercontent.com/robertgomezbatte-svg/Chiqui-Colors-01/main/logo.png"
+          alt="Chiqui Colors">
       </div>
       <span>Chiqui&nbsp;Colors</span>
     </a>
 
-    <nav class="only-desktop" aria-label="Principal">
+    <nav class="only-desktop">
       <ul>
         <li><a href="index.html">Inicio</a></li>
         <li><a href="cumpleanos.html" aria-current="page">Cumpleaños</a></li>
@@ -36,87 +39,92 @@
         <li><a href="index.html#contacto">Contacto</a></li>
       </ul>
     </nav>
-
-    <button class="hamburger only-mobile" aria-label="Abrir menú">☰</button>
-  </div>
-
-  <!-- MENÚ MÓVIL -->
-  <div id="mobileMenu" class="container only-mobile" hidden>
-    <nav>
-      <ul style="display:grid;gap:10px;padding-bottom:12px">
-        <li><a href="index.html">Inicio</a></li>
-        <li><a href="cumpleanos.html">Cumpleaños</a></li>
-        <li><a href="index.html#servicios">Servicios</a></li>
-        <li><a href="index.html#precios">Precios</a></li>
-        <li><a href="index.html#contacto">Contacto</a></li>
-      </ul>
-    </nav>
   </div>
 </header>
 
-<main class="container">
+<main>
 
-  <!-- HERO -->
-  <section class="hero">
-    <span class="kicker">Cumpleaños infantiles</span>
-    <h1>Cumpleaños inolvidables en Chiqui Colors</h1>
-    <p class="lead">
-      Un espacio pensado para que los niños disfruten al máximo y los padres estén tranquilos.
-      Diversión, color y recuerdos que no se olvidan.
-    </p>
+  <!-- HERO (MISMO ESTILO QUE HOME) -->
+  <section class="hero container">
+    <div>
+      <span class="kicker">Cumpleaños infantiles</span>
+      <h1>Cumpleaños inolvidables en Chiqui Colors</h1>
+      <p class="lead">
+        Un espacio seguro, colorido y divertido donde los peques disfrutan
+        y los padres pueden relajarse sin preocuparse de nada.
+      </p>
 
-    <div class="hero-actions">
-      <a class="btn" href="#info">Ver cómo son</a>
-      <a class="btn secondary" href="#calendario">Disponibilidad</a>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px">
+        <a class="btn" href="#disponibilidad">Ver disponibilidad</a>
+        <a class="btn secondary" href="https://wa.me/34675751094" target="_blank">
+          Reservar por WhatsApp
+        </a>
+      </div>
+
+      <div class="hero-cards">
+        <div class="card"><div class="stat">🎂</div><div class="muted">Merienda incluida</div></div>
+        <div class="card"><div class="stat">🏰</div><div class="muted">Parque infantil</div></div>
+        <div class="card"><div class="stat">👑</div><div class="muted">Trono cumpleañer@</div></div>
+        <div class="card"><div class="stat">🎉</div><div class="muted">Sala privada</div></div>
+      </div>
+    </div>
+
+    <div class="mock">
+      <img src="https://raw.githubusercontent.com/robertgomezbatte-svg/Chiqui-Colors-01/main/img/5.jpeg"
+           alt="Cumpleaños en Chiqui Colors">
     </div>
   </section>
 
   <!-- INFO -->
-  <section id="info">
-    <h2 class="section-title">¿Cómo son nuestros cumpleaños?</h2>
-    <p class="section-sub">
-      Nos encargamos de todo para que tú solo tengas que disfrutar del día.
-    </p>
+  <section class="container">
+    <h2 class="section-title">¿Qué incluye el cumpleaños?</h2>
+    <p class="section-sub">Nos encargamos de todo para que tú solo disfrutes.</p>
 
     <div class="features">
       <article class="feature">
-        <div class="icon">🎉</div>
+        <div class="icon">🎈</div>
         <h3>Sala privada</h3>
-        <p>Espacio reservado solo para tu grupo durante toda la celebración.</p>
+        <p>Espacio exclusivo para tu grupo durante toda la celebración.</p>
       </article>
-
       <article class="feature">
         <div class="icon">🍰</div>
-        <h3>Merienda incluida</h3>
-        <p>Opciones adaptadas para los peques, con posibilidad de personalización.</p>
+        <h3>Merienda</h3>
+        <p>Opciones adaptadas a los peques y posibilidad de personalización.</p>
       </article>
-
       <article class="feature">
-        <div class="icon">🧸</div>
-        <h3>Parque infantil</h3>
-        <p>Acceso completo a las zonas de juego para que no paren de divertirse.</p>
+        <div class="icon">🧦</div>
+        <h3>Juego seguro</h3>
+        <p>Zonas por edades y parque infantil completamente acolchado.</p>
       </article>
     </div>
   </section>
 
-  <!-- CALENDARIO -->
-  <section id="calendario">
+  <!-- CALENDARIO REAL -->
+  <section id="disponibilidad" class="container">
     <h2 class="section-title">Disponibilidad</h2>
     <p class="section-sub">
       Consulta las fechas libres y escríbenos para reservar.
     </p>
 
     <div id="agenda-reservas" class="card">
-      <!-- AQUÍ PEGAS EXACTAMENTE EL MISMO HTML + JS DEL CALENDARIO QUE USAS EN index.html -->
-      <p style="text-align:center;color:var(--muted)">
-        (Aquí va el calendario de reservas)
-      </p>
-    </div>
+      <div class="agenda-controles">
+        <button id="prevMonth">‹</button>
+        <span id="monthLabel"></span>
+        <button id="nextMonth">›</button>
+      </div>
 
-    <div style="margin-top:24px;text-align:center">
-      <a class="btn" href="https://wa.me/34675751094" target="_blank">
-        Reservar por WhatsApp
-      </a>
+      <div class="agenda-legend">
+        <span class="legend-box free"></span> Libre
+        <span class="legend-box occupied"></span> Reservado
+        <span class="slot free">M</span> Mañana
+        <span class="slot free">T</span> Tarde
+      </div>
+
+      <div id="agendaGrid" class="agenda-grid"></div>
+
+      <p style="margin-top:12px;font-size:.9rem;color:var(--muted)">
+        Para reservar, mándanos un WhatsApp con la fecha y horario.
+      </p>
     </div>
   </section>
 
@@ -129,12 +137,7 @@
 </footer>
 
 <script>
-  // MENÚ MÓVIL (MISMO JS QUE index.html)
-  const btn = document.querySelector('.hamburger');
-  const menu = document.getElementById('mobileMenu');
-  btn?.addEventListener('click', () => {
-    menu.toggleAttribute('hidden');
-  });
+/* === PEGA AQUÍ EXACTAMENTE EL MISMO JS DEL CALENDARIO QUE USAS EN index.html === */
 </script>
 
 </body>
