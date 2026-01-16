@@ -12,8 +12,334 @@
 
   <!-- ✅ MISMO STYLE QUE index.html -->
   <style>
-    /* === PEGA AQUÍ EL <style> COMPLETO DE index.html SIN CAMBIAR NADA === */
-    /* (Es largo, pero es EXACTAMENTE el mismo que ya tienes) */
+    :root{
+  --bg:#fffdf9;         /* fondo blanco cálido */
+  --card:#fffefb;       /* tarjetas suaves */
+  --soft:#ffe7c7;       /* bordes suaves melocotón */
+  --txt:#333333;        /* texto principal */
+  --muted:#707070;      /* texto secundario */
+  --brand:#f5b237;      /* naranja del logo */
+  --brand-2:#17c8e6;    /* cian del logo */
+  --brand-3:#ff454b;    /* coral del logo */
+  --brand-4:#b5ff6e;    /* lima suave (detalles) */
+  --shadow:0 8px 24px rgba(0,0,0,.08);
+  --radius:20px;
+}
+
+    *{box-sizing:border-box}
+    html,body{
+      margin:0;height:100%;
+      font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;
+      background:
+        radial-gradient(1000px 700px at 90% -10%, rgba(249,168,212,.10), transparent 60%),
+        radial-gradient(800px 600px at 10% 30%, rgba(253,230,138,.12), transparent 55%),
+        var(--bg);
+      color:var(--txt)
+    }
+    a{color:inherit;text-decoration:none}
+    .container{width:min(1100px,90%);margin:0 auto}
+
+ /* Header: fijo y ocultable al hacer scroll */
+header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,.97), rgba(255,255,255,.90));
+  border-bottom:1px solid rgba(0,0,0,.06);
+  z-index: 9999;
+  transition: transform .35s ease, opacity .25s ease;
+}
+header.hide{
+  transform: translateY(-100%);
+  opacity: 0;
+}
+body {
+  padding-top: 80px; /* evita que el contenido quede tapado */
+    }
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;align-items:center;gap:.7rem;font-weight:800;letter-spacing:.2px;color:var(--brand)}
+    .logo{width:40px;height:40px;border-radius:12px;background:#ffffff;border:1px solid var(--soft);display:grid;place-items:center;box-shadow:var(--shadow);overflow:hidden}
+.logo-img{width:100%;height:100%;object-fit:contain}
+    nav ul{display:flex;gap:1.2rem;list-style:none;padding:0;margin:0}
+    nav a{color:var(--txt);font-weight:600}
+    nav a:hover{color:var(--brand)}
+    nav a:hover{color:#111}
+
+    .btn{display:inline-flex;align-items:center;gap:.55rem;background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#ffffff;padding:.9rem 1.05rem;border-radius:999px;font-weight:800;border:0;cursor:pointer;box-shadow:var(--shadow)}
+    .btn.secondary{background:#fff;border:2px solid var(--brand);color:var(--brand)}
+    .btn.secondary{background:transparent;border:2px solid var(--brand);color:#7a2456}
+
+    /* Hero */
+    .hero{padding:56px 0 42px;display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:center}
+    .kicker{display:inline-block;padding:.35rem .7rem;border:1px solid var(--soft);border-radius:999px;color:#7a2456;background:rgba(249,168,212,.15);font-size:.9rem}
+    h1{font-size:clamp(2rem, 4vw + .5rem, 3.2rem);line-height:1.15;margin:.8rem 0}
+    .lead{color:var(--muted);font-size:1.08rem}
+    .hero-cards{display:grid;gap:16px;margin-top:28px;grid-template-columns:repeat(2,1fr)}
+    .card{background:var(--card);border:1px solid var(--soft);padding:18px;border-radius:var(--radius);box-shadow:var(--shadow)}
+    .stat{font-size:1.6rem;font-weight:800;color:#7a2456}
+
+    /* Sections */
+    section{padding:64px 0}
+    .section-title{font-size:1.9rem;margin:0 0 10px;color:#7a2456}
+    .section-sub{color:var(--muted);margin:0 0 30px}
+
+    /* Features */
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .feature{background:var(--card);border:1px solid var(--soft);border-radius:var(--radius);padding:18px}
+    .feature h3{margin:.6rem 0;color:#7a2456}
+    .icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--brand-2), #0ea5e9); /* azul predominante */
+  display: grid;
+  place-items: center;
+  color: #ffffff; /* texto blanco */
+  font-weight: 900;
+  border: 1px solid rgba(23,200,230,0.25); /* borde suave azul */
+}
+
+    /* Showcase */
+    .showcase{display:grid;grid-template-columns:1.4fr 1fr;gap:18px}
+    .mock{border-radius:var(--radius);overflow:hidden;border:1px solid var(--soft);background:var(--card)}
+    .mock img{display:block;width:100%;height:auto}
+/* Rotadores: marco fijo para que no “salte” la página */
+.rotator{
+  position:relative;
+  aspect-ratio: 4 / 3;     /* puedes cambiar a 16/9 o lo que mejor quede */
+  overflow:hidden;         /* por si se recorta un poco la foto */
+}
+
+.rotator img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;        /* rellena el marco recortando bordes si hace falta */
+  transition: opacity .5s ease-in-out;
+}
+
+.rot-btn{
+  position:absolute; top:50%; transform:translateY(-50%);
+  border:none; background:rgba(255,255,255,.9);
+  padding:6px 12px; border-radius:999px; box-shadow:var(--shadow);
+  cursor:pointer; font-size:22px; line-height:1; color:#333;
+}
+.rotator .prev{ left:10px; }
+.rotator .next{ right:10px; }
+.rot-btn:hover{ background:#fff; }
+
+@media (max-width: 960px){
+  .rot-btn{ padding:6px 10px; font-size:20px; }
+}
+    /* Pricing */
+    .pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.plan {
+  background: var(--card);
+  border: 1px solid var(--soft);
+  border-radius: var(--radius);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow);
+}
+
+.price {
+  font-size: 2rem;
+  font-weight: 800;
+  margin: .2rem 0 1rem;
+  color: #7a2456;
+}
+
+.plan ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0; /* 🔥 añade espacio debajo de la lista */
+  display: grid;
+  gap: .55rem;
+  color: var(--muted);
+}
+
+.plan .cta {
+  margin-top: auto;
+  margin-top: 12px; /* 🔥 espacio extra antes del botón */
+}
+/* === Agenda / Calendario === */
+#agenda-reservas{
+  margin-top: 10px;
+}
+
+.agenda-controles{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:8px;
+}
+
+.agenda-controles button{
+  border:1px solid var(--soft);
+  background:#fff;
+  border-radius:999px;
+  padding:4px 10px;
+  cursor:pointer;
+  font-weight:600;
+  font-size:1rem;
+}
+
+.agenda-controles button:hover{
+  background:var(--soft);
+}
+
+#monthLabel{
+  font-weight:700;
+  text-transform:capitalize;
+}
+
+.agenda-legend{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  margin-bottom:8px;
+  font-size:.8rem;
+  color:var(--muted);
+  flex-wrap:wrap;
+}
+
+.legend-box{
+  width:14px;
+  height:14px;
+  border-radius:4px;
+  display:inline-block;
+}
+
+.legend-box.free{
+  background:rgba(181,255,110,0.4); /* verde suave */
+}
+
+.legend-box.occupied{
+  background:rgba(255,69,75,0.5); /* rojo suave */
+}
+
+.agenda-grid{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:4px;
+  font-size:.85rem;
+}
+
+.agenda-day-name{
+  text-align:center;
+  font-weight:600;
+  color:var(--muted);
+  padding:4px 0;
+}
+
+.agenda-day{
+  min-height:40px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:10px;
+}
+
+/* Fondo general del día */
+.agenda-day.day-free{
+  background:rgba(181,255,110,0.25);      /* todo libre */
+}
+
+.agenda-day.day-full{
+  background:rgba(255,69,75,0.25);        /* todo ocupado */
+}
+
+.agenda-day.day-mixed{
+  background:rgba(245,178,55,0.25);       /* solo una franja ocupada (naranja suave) */
+}
+
+.agenda-day.empty{
+  background:transparent;
+}
+
+/* Contenido interno: número + franjitas */
+.agenda-day-inner{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:2px;
+}
+
+.agenda-day-number{
+  font-weight:600;
+  font-size:.85rem;
+}
+
+.agenda-slots{
+  display:flex;
+  gap:2px;
+}
+
+.slot{
+  font-size:.7rem;
+  padding:1px 4px;
+  border-radius:6px;
+}
+
+.slot.free{
+  background:rgba(181,255,110,0.8);
+}
+
+.slot.occupied{
+  background:rgba(255,69,75,0.8);
+  color:#7a2456;
+}
+
+    
+    /* FAQ */
+    details{background:var(--card);border:1px solid var(--soft);border-radius:14px;padding:16px}
+    details + details{margin-top:10px}
+    summary{cursor:pointer;font-weight:600;color:#7a2456}
+
+    /* Contact */
+    form{display:grid;gap:12px}
+    input, textarea{width:100%;padding:14px;border-radius:12px;border:1px solid var(--soft);background:#fff;color:var(--txt)}
+    label{font-size:.92rem;color:var(--muted)}
+
+    footer{padding:36px 0;border-top:1px solid rgba(0,0,0,.08);color:var(--muted)}
+
+/* Responsive */
+.only-mobile{display:none}
+
+@media (max-width: 960px){
+  /* Estructura principal */
+  .hero{grid-template-columns:1fr;gap:16px;padding-top:20px}
+  .hero-cards{grid-template-columns:1fr 1fr}
+  .features{grid-template-columns:1fr 1fr}
+  .showcase{grid-template-columns:1fr}
+  .pricing{grid-template-columns:1fr}
+
+  /* Ocultamos el menú de escritorio */
+  .only-desktop{display:none}
+
+  /* Mostramos el contenedor móvil SIEMPRE y en horizontal */
+  .only-mobile{display:block}
+  #mobileMenu{display:block !important; padding:0}
+  #mobileMenu nav ul{
+    display:flex !important;
+    flex-wrap:nowrap;
+    gap:12px;
+    overflow-x:auto;           /* scroll horizontal si no cabe */
+    -webkit-overflow-scrolling:touch;
+    white-space:nowrap;        /* que no salten de línea */
+    padding:8px 0;
+    margin:0;
+  }
+  #mobileMenu nav ul li{
+    flex:0 0 auto;             /* que cada item mantenga su ancho */
+  }
+
+  /* Ocultamos el botón “Menú” porque ya no hace falta desplegar nada */
+  #menuBtn{display:none}
+}
   </style>
 </head>
 
