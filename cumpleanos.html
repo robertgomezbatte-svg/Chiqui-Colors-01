@@ -391,7 +391,7 @@ body {
         <div class="card"><div class="stat">🎂</div><div class="muted">Merienda incluida</div></div>
         <div class="card"><div class="stat">🏰</div><div class="muted">Parque infantil</div></div>
         <div class="card"><div class="stat">👑</div><div class="muted">Trono cumpleañer@</div></div>
-        <div class="card"><div class="stat">🎉</div><div class="muted">Sala privada</div></div>
+        <div class="card"><div class="stat">🎉</div><div class="muted">Sala Abierta</div></div>
       </div>
     </div>
 
@@ -409,8 +409,8 @@ body {
     <div class="features">
       <article class="feature">
         <div class="icon">🎈</div>
-        <h3>Sala privada</h3>
-        <p>Espacio exclusivo para tu grupo durante toda la celebración.</p>
+        <h3>Sala Abierta</h3>
+        <p>Espacio abierto para tu grupo durante toda la celebración.</p>
       </article>
       <article class="feature">
         <div class="icon">🍰</div>
@@ -427,7 +427,7 @@ body {
 
   <!-- CALENDARIO REAL -->
   <section id="disponibilidad" class="container">
-    <h2 class="section-title">Disponibilidad</h2>
+    <h2 class="section-title">Disponibilidad para Cumpleaños</h2>
     <p class="section-sub">
       Consulta las fechas libres y escríbenos para reservar.
     </p>
@@ -441,7 +441,7 @@ body {
 
       <div class="agenda-legend">
         <span class="legend-box free"></span> Libre
-        <span class="legend-box occupied"></span> Reservado
+        <span class="legend-box occupied"></span> Cumpleaños
         <span class="slot free">M</span> Mañana
         <span class="slot free">T</span> Tarde
       </div>
@@ -475,15 +475,11 @@ body {
   // 👉 DÍAS OCUPADOS POR FRANJA
   // Formato: "AAAA-MM-DD"
   const occupiedMorning = [
-    "2025-11-22","2025-12-26","2025-12-27",
-    "2026-01-18","2026-01-25","2026-02-14",
-    "2026-02-22","2026-01-31","2026-02-01"
+    "2026-01-17","2026-02-15"
   ];
 
-  const occupiedAfternoon = [
-    "2025-12-13","2025-12-20","2025-12-24","2025-12-25","2025-12-26","2025-12-27","2025-12-31",
-    "2026-01-09","2026-01-11","2026-01-14","2026-01-15","2026-01-17","2026-01-19","2026-01-27",
-    "2026-01-31","2026-01-10","2026-04-18","2026-06-06"
+  const occupiedAfternoon = [ 
+  "2026-01-15","2026-01-24","2026-02-28"
   ];
 
   let today        = new Date();
