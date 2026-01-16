@@ -463,7 +463,137 @@ body {
 </footer>
 
 <script>
-/* === PEGA AQUÍ EXACTAMENTE EL MISMO JS DEL CALENDARIO QUE USAS EN index.html === */
+// === Agenda: días libres / ocupados (mañana / tarde) ===
+(function(){
+  const grid  = document.getElementById('agendaGrid');
+  const label = document.getElementById('monthLabel');
+  const prev  = document.getElementById('prevMonth');
+  const next  = document.getElementById('nextMonth');
+
+  if (!grid || !label || !prev || !next) return;
+
+  // 👉 DÍAS OCUPADOS POR FRANJA
+  // Formato: "AAAA-MM-DD"
+  const occupiedMorning = [
+    "2025-11-22","2025-12-26","2025-12-27",
+    "2026-01-18","2026-01-25","2026-02-14",
+    "2026-02-22","2026-01-31","2026-02-01"
+  ];
+
+  const occupiedAfternoon = [
+    "2025-12-13","2025-12-20","2025-12-24","2025-12-25","2025-12-26","2025-12-27","2025-12-31",
+    "2026-01-09","2026-01-11","2026-01-14","2026-01-15","2026-01-17","2026-01-19","2026-01-27",
+    "2026-01-31","2026-01-10","2026-04-18","2026-06-06"
+  ];
+
+  let today        = new Date();
+  let currentYear  = today.getFullYear();
+  let currentMonth = today.getMonth(); // 0 = enero
+
+  function renderCalendar(year, month){
+    const opts = { month:"long", year:"numeric" };
+    label.textContent = new Date(year, month, 1).toLocaleDateString("es-ES", opts);
+
+    grid.innerHTML = "";
+
+    // Cabecera: nombres de los días
+    const dayNames = ["Lun","Mar","Mié","Jue","Vie","Sáb","Dom"];
+    dayNames.forEach(name => {
+      const el = document.createElement("div");
+      el.className = "agenda-day-name";
+      el.textContent = name;
+      grid.appendChild(el);
+    });
+
+    const firstDay = new Date(year, month, 1);
+    let startWeekDay = firstDay.getDay(); // 0=Dom, 1=Lun...
+    startWeekDay = (startWeekDay === 0) ? 6 : startWeekDay - 1; // Lunes primero
+
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    // Huecos antes del día 1
+    for(let i=0;i<startWeekDay;i++){
+      const empty = document.createElement("div");
+      empty.className = "agenda-day empty";
+      grid.appendChild(empty);
+    }
+
+    // Días del mes
+    for(let day=1; day<=daysInMonth; day++){
+      const cell = document.createElement("div");
+      cell.classList.add("agenda-day");
+
+      const monthStr = String(month + 1).padStart(2,"0");
+      const dayStr   = String(day).padStart(2,"0");
+      const dateStr  = `${year}-${monthStr}-${dayStr}`;
+
+      const morningOcc   = occupiedMorning.includes(dateStr);
+      const afternoonOcc = occupiedAfternoon.includes(dateStr);
+
+      // Estado general del día (fondo de la casilla)
+      if (!morningOcc && !afternoonOcc){
+        cell.classList.add("day-free");   // todo libre
+      } else if (morningOcc && afternoonOcc){
+        cell.classList.add("day-full");   // todo ocupado
+      } else {
+        cell.classList.add("day-mixed");  // solo una franja ocupada
+      }
+
+      // Contenido interno: número + M/T
+      const inner = document.createElement("div");
+      inner.className = "agenda-day-inner";
+
+      const num = document.createElement("div");
+      num.className = "agenda-day-number";
+      num.textContent = day;
+
+      const slots = document.createElement("div");
+      slots.className = "agenda-slots";
+
+      const slotM = document.createElement("span");
+      slotM.className = "slot " + (morningOcc ? "occupied" : "free");
+      slotM.textContent = "M"; // mañana
+
+      const slotT = document.createElement("span");
+      slotT.className = "slot " + (afternoonOcc ? "occupied" : "free");
+      slotT.textContent = "T"; // tarde
+
+      slots.appendChild(slotM);
+      slots.appendChild(slotT);
+
+      inner.appendChild(num);
+      inner.appendChild(slots);
+      cell.appendChild(inner);
+
+      cell.title =
+        "Mañana: " + (morningOcc ? "ocupado" : "libre") +
+        " · Tarde: " + (afternoonOcc ? "ocupado" : "libre");
+
+      grid.appendChild(cell);
+    }
+  }
+
+  prev.addEventListener("click", () => {
+    currentMonth--;
+    if (currentMonth < 0){
+      currentMonth = 11;
+      currentYear--;
+    }
+    renderCalendar(currentYear, currentMonth);
+  });
+
+  next.addEventListener("click", () => {
+    currentMonth++;
+    if (currentMonth > 11){
+      currentMonth = 0;
+      currentYear++;
+    }
+    renderCalendar(currentYear, currentMonth);
+  });
+
+  renderCalendar(currentYear, currentMonth);
+})();
+
 </script>
 
 </body>
