@@ -164,56 +164,6 @@ body {
   margin-top: 12px; /* 🔥 espacio extra antes del botón */
 }
 
-/* Fondo general del día */
-.agenda-day.day-free{
-  background:rgba(181,255,110,0.25);      /* todo libre */
-}
-
-.agenda-day.day-full{
-  background:rgba(255,69,75,0.25);        /* todo ocupado */
-}
-
-.agenda-day.day-mixed{
-  background:rgba(245,178,55,0.25);       /* solo una franja ocupada (naranja suave) */
-}
-
-.agenda-day.empty{
-  background:transparent;
-}
-
-/* Contenido interno: número + franjitas */
-.agenda-day-inner{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:2px;
-}
-
-.agenda-day-number{
-  font-weight:600;
-  font-size:.85rem;
-}
-
-.agenda-slots{
-  display:flex;
-  gap:2px;
-}
-
-.slot{
-  font-size:.7rem;
-  padding:1px 4px;
-  border-radius:6px;
-}
-
-.slot.free{
-  background:rgba(181,255,110,0.8);
-}
-
-.slot.occupied{
-  background:rgba(255,69,75,0.8);
-  color:#7a2456;
-}
-
     
     /* FAQ */
     details{background:var(--card);border:1px solid var(--soft);border-radius:14px;padding:16px}
